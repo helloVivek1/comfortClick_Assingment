@@ -6,7 +6,7 @@ import placeOrder from "./pages/placeOrder.js"
 
 
 describe("Comfort click Assignment",function(){
-    cy.on("uncaught:exception",function(err,runnable){
+    Cypress.on("uncaught:exception",function(err,runnable){
         return false
     })
 
@@ -19,16 +19,18 @@ describe("Comfort click Assignment",function(){
 
     })
 
-    it.only("Task 2 - Write a cypress code to Print name of products",function(){
+    it("Task 2 - Write a cypress code to Print name of products",function(){
         printNames.VisitUrl()
         printNames.reDirectedToCategory()
     })
 
-    it('Task 3 - Write a cypress code to place an order using test credentials',function(){
+    it.only('Task 3 - Write a cypress code to place an order using test credentials',function(){
         placeOrders.visitUrl()
         placeOrders.selectProduct('magnisum glicina')
         placeOrders.clickOnCartButton()
         placeOrders.checkOut()
+        placeOrders.fillForm()
+        placeOrders.placeOrder()
 
 
 
