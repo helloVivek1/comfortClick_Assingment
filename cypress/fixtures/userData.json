@@ -1,0 +1,10 @@
+{
+    "firstName":"firstName",
+    "lastName":"lastName",
+    "address": "address",
+    "postalCode":2000,
+    "city":"city",
+    "cardNumber":4242424242424242,
+    "expiryDate":1226,
+    "cvv"   : 121
+}

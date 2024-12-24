@@ -9,6 +9,8 @@ describe("Comfort click Assignment",function(){
     Cypress.on("uncaught:exception",function(err,runnable){
         return false
     })
+    
+    
 
     let printNames = new PrintProductName
     let placeOrders = new placeOrder
@@ -25,6 +27,8 @@ describe("Comfort click Assignment",function(){
     })
 
     it.only('Task 3 - Write a cypress code to place an order using test credentials',function(){
+        // cy.fixture('userData').then((data)=>{
+        //     userData = data
         placeOrders.visitUrl()
         placeOrders.selectProduct('magnisum glicina')
         placeOrders.clickOnCartButton()
@@ -32,7 +36,7 @@ describe("Comfort click Assignment",function(){
         placeOrders.fillForm()
         placeOrders.placeOrder()
 
-
+    // })
 
     })
 })

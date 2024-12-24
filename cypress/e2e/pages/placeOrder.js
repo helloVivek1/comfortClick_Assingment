@@ -30,6 +30,8 @@ export default class placeOrder{
 
     }
     
+    
+    
 
     visitUrl(){
         cy.visit(this.selector.url)
@@ -61,34 +63,40 @@ export default class placeOrder{
     }
 
     fillForm(){
+        let userData
+        cy.fixture('userData').then((data)=>{
+            userData = data
+
+        
         cy.get(this.selector.email)
         .type(`helloComfort${Math.floor(Math.random()*100000000)}@gmail.com`)
         cy.get(this.selector.checkbox).check()      
-        cy.get(this.selector.firstName).type('firstName')
-        cy.get(this.selector.lastName).type('lastName')
+        cy.get(this.selector.firstName).type(userData.firstName)
+        cy.get(this.selector.lastName).type(userData.lastName)
         cy.get(this.selector.mobileNumber).type(Math.floor(Math.random() * 10000000000))
-        cy.get(this.selector.address).type('MHhh')
-        cy.get(this.selector.postCode).type(2000)
-        cy.get(this.selector.city).type('SomeOne')
+        cy.get(this.selector.address).type(userData.address)
+        cy.get(this.selector.postCode).type(userData.postalCode)
+        cy.get(this.selector.city).type(userData.city)
         cy.get(this.selector.betaling).click()
         cy.wait(2000)
 
         const iframeBody1 = cy.get(this.selector.iframe1)
         .its('0.contentDocument.body').should('be.visible')
         .then(cy.wrap)        
-        iframeBody1.find(this.selector.cardNumber).clear().type(4242424242424242)
+        iframeBody1.find(this.selector.cardNumber).clear().type(userData.cardNumber)
         
         const iframeBody2 = cy.get(this.selector.iframe2).its('0.contentDocument.body').should('be.visible')
-        .then(cy.wrap).find(this.selector.expiryDate).type(1224)
+        .then(cy.wrap).find(this.selector.expiryDate).type(userData.expiryDate)
 
         const iframeBody3 = cy.get(this.selector.iframe3).its('0.contentDocument.body').should('be.visible')
-        .then(cy.wrap).find(this.selector.cvv).type(111)
+        .then(cy.wrap).find(this.selector.cvv).type(userData.cvv)
         
         cy.get(this.selector.placeOrderBut).click()
+    })
     }
 
     placeOrder(){
-        cy.get(this.selector.placeOrderBut).click()
+        cy.get(this.selector.placeOrderBut).click({force:true})
     }
 
 
